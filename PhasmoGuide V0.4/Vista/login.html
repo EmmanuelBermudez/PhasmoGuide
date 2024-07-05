@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body style="background-image: url('img/fondo.jpg');">
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Login</h2>
+            </div>
+            <form id="loginForm" onsubmit="return loginUser(event)">
+                <input type="email" name="email" placeholder="Correo Electrónico" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script>
+        function loginUser(event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+
+            // Obtener los valores del formulario
+            const email = document.getElementById('loginForm').elements['email'].value;
+            const password = document.getElementById('loginForm').elements['password'].value;
+
+            // Llamar a la función del controlador para iniciar sesión
+            const loginSuccess = loginUserToController(email, password);
+
+            if (loginSuccess) {
+                // Redirigir a la página de inicio
+                alert('Inicio de sesión exitoso. ¡Bienvenido de nuevo!');
+                window.location.href = 'index.html'; // Redirigir a la página de inicio
+            } else {
+                alert('Correo electrónico o contraseña incorrectos. Inténtalo de nuevo.');
+            }
+
+            return false; // Evitar el envío del formulario
+        }
+    </script>
+</body>
+</html>

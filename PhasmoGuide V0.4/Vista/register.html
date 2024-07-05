@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body style="background-image: url('img/fondo.jpg');">
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Registro</h2>
+            </div>
+            <form id="registerForm" onsubmit="return registerUser(event)">
+                <input type="text" name="name" placeholder="Nombre" required>
+                <input type="email" name="email" placeholder="Correo Electrónico" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script>
+        function registerUser(event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+
+            // Obtener los valores del formulario
+            const name = document.getElementById('registerForm').elements['name'].value;
+            const email = document.getElementById('registerForm').elements['email'].value;
+            const password = document.getElementById('registerForm').elements['password'].value;
+
+            // Llamar a la función del controlador para registrar al usuario
+            const registrationSuccess = registerUserToController(name, email, password);
+
+            if (registrationSuccess) {
+                // Redirigir a la página de login
+                alert('Registro exitoso. Por favor, inicia sesión.');
+                window.location.href = 'login.html'; // Redirigir a la página de login
+            } else {
+                alert('Hubo un problema al registrar. Inténtalo de nuevo.');
+            }
+
+            return false; // Evitar el envío del formulario
+        }
+    </script>
+</body>
+</html>
